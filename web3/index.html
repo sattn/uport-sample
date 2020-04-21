@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/uport-connect/dist/uport-connect.js"></script>
+    </head>
+    <body>
+        <div id="msg">
+            Give the module a second to load...
+        </div>
+        <script>
+            const Connect = window.uportconnect;
+            const uport = new Connect('MyDApp');
+            uport.requestDisclosure();
+
+            uport.onResponse('disclosureReq').then(res => {
+                const did = res.payload.did;
+                json = JSON.stringify(res.payload);
+                console.log(json);
+                document.querySelector('#msg').innerHTML = "Congratulations you are now <b>logged in</b>. Here is your DID identifier: " + json;
+            });
+        </script>
+    </body>
+</html>
